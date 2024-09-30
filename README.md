@@ -1,8 +1,8 @@
-# Group TEAM_NUMBER
-Group Name: TEAM_NAME
+# Group 7
+Group Name: 7
 
-[MVP Link](https://docs.google.com/document/d/1xFI9DDdO5HZAcu36Y6NL-RTDry5E3WHkfy-ZEWuqbXM/edit?usp=sharing)
+[MVP Link](https://docs.google.com/document/d/1JfqxiQTA5kDsx6iQ7WV0qB4Az8Z1HuEA/edit)
 
-Team Members: STUDENTS_NETIDS
+Team Members: pzatek2, duncanr2, pranitm2, aashrut2, hkhoo, span18, zhenyuj2
 
-Project Manager: PM_NETID
+Project Manager: naina3
