@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Check for inbox",
+    "version": "1.0",
+    "description": "Checks if in the outlook inbox",
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": ["tabs", "activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["*://outlook.office.com/mail/*"],
+        "js" : ["content.js"]
+      }
+    ]
+
+  }
+  
