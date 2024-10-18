@@ -2,3 +2,4 @@ extracts email bodies and headers on Outlook and Gmail, creates an event in one 
 event creation logic needs refined
 
 still working on Azure tenant_id issues
+google portion working
