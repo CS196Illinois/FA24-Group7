@@ -27,19 +27,6 @@ def main():
             end_time = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
             create_google_calendar_event(calendar_service, subject, snippet, start_time, end_time)
 
-    # Outlook API services
-    token = get_outlook_token()
-    outlook_messages = list_outlook_messages(token)
-    for msg in outlook_messages:
-        subject = msg['subject']
-        
-        # Event creation logic needs refined
-        if 'meeting' in subject.lower():  
-            snippet = msg['body']['content']
-            start_time = datetime.datetime.now().isoformat()
-            end_time = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
-            create_google_calendar_event(calendar_service, subject, snippet, start_time, end_time)
-
 # Authenticate and initialize Gmail API
 def authenticate_gmail():
     SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -97,34 +84,6 @@ def create_google_calendar_event(service, summary, description, start_time, end_
         }
     }
     return service.events().insert(calendarId='primary', body=event).execute()
-
-# Get Outlook token
-def get_outlook_token():
-    # set as environmental variables
-    client_id = os.getenv('CLIENT_ID')
-    tenant_id = os.getenv('TENANT_ID')
-    client_secret = os.getenv('CLIENT_SECRET')
-
-    authority = f'https://login.microsoftonline.com/{tenant_id}'
-    scope = ['https://graph.microsoft.com/.default']
-    app = msal.ConfidentialClientApplication(client_id, authority=authority, client_credential=client_secret)
-    result = app.acquire_token_silent(scope, account=None)
-    if not result:
-        result = app.acquire_token_for_client(scopes=scope)
-    if "access_token" in result:
-        return result['access_token']
-    else:
-        raise Exception("Could not obtain access token")
-
-# List Outlook messages
-def list_outlook_messages(token):
-    headers = {
-        'Authorization': f'Bearer {token}',
-        'Prefer': 'outlook.body-content-type="text"',
-    }
-    response = requests.get('https://graph.microsoft.com/v1.0/me/mailFolders/Inbox/messages', headers=headers)
-    response.raise_for_status()
-    return response.json()['value']
 
 if __name__ == '__main__':
     main()
